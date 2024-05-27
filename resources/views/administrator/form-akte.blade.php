@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Administrator</title>
+    <title>Form Akta Kelahiran | Administrator</title>
     <meta name="author" content="David Grzyb">
     <meta name="description" content="">
 
@@ -20,24 +20,35 @@
         .nav-item:hover { background: #1947ee; }
         .account-link:hover { background: #3d68ff; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 font-family-karla flex">
+     @if($message = Session::get('success'))
+    <script>
+        Swal.fire({
+            title: "Terima kasih",
+            text: "{{ Session::get('success') }}",
+            icon: "success"
+        });
+    </script>
+@endif
 
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Dukcapil Kota Tegal</a>
-            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button> -->
         </div>
         <nav class="text-white text-base font-semibold pt-3">
-            <a href="{{ url('/') }}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <button type="button" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                Tanggal  
+                <span id="tanggalwaktu" class="text-white font-bold ml-2"></span>
+            </button>
+            <a href="{{ url('/') }}" class="flex items-center  text-white py-4 pl-6 nav-item">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Dashboard
             </a>
-            <a href="{{ url('/administrator/menu') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ url('/blank') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-sticky-note mr-3"></i>
-                Menu
+                Blank Page
             </a>
             <a href="{{ url('/tables') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-table mr-3"></i>
@@ -138,99 +149,55 @@
     
         <div class="w-full overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
-                <h1 class="text-3xl text-black pb-6">Dashboard Dukcapil</h1>
-    
-                <div class="flex flex-wrap mt-6">
-                    <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
-                        <p class="text-xl pb-3 flex items-center">
-                            <i class="fas fa-plus mr-3"></i> Monthly Reports
-                        </p>
-                        <div class="p-6 bg-white">
-                            <canvas id="chartOne" width="400" height="200"></canvas>
-                        </div>
+                <h1 class="text-3xl text-black pb-6">Form Akte Kelahiran</h1>
+                
+                <div class="flex flex-wrap gap-20 px-5 mx-auto">
+
+                   <form method="POST" class="grid md:grid-cols-2 w-full gap-10  auto-rows-max grid-cols-1">
+                    @csrf
+                    <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl">NIK</label>
+                    <br>
+                    <input type="text" name="nik" placeholder="nik" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
                     </div>
-                    <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
-                        <p class="text-xl pb-3 flex items-center">
-                            <i class="fas fa-check mr-3"></i> Resolved Reports
-                        </p>
-                        <div class="p-6 bg-white">
-                            <canvas id="chartTwo" width="400" height="200"></canvas>
-                        </div>
+                    <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl">Nama </label>
+                    <br>
+                    <input type="text" name="nama" placeholder="nama"  class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
                     </div>
+                    <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl">Nama Ayah</label>
+                    <input type="text" name="ayah" placeholder="ayah" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl"> Nama Ibu</label>
+                    <br>
+                    <input type="text" name="ibu" placeholder="ibu" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div>
+                    <div class="col-span-2">
+                    <label for="" class="text-2xl">Tanggal Lahir</label>
+                    
+                    <input type="datetime-local" name="tanggallahir" id="tanggallahir" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div>
+                    {{-- <input type="datetime"> --}}
+                    <div class="col-span-2">
+                    <label for="" class="text-2xl">Alamat</label>
+                    <input type="text" name="alamat" placeholder="alamat" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div>
+                    
+                    <div class="flex justify-center w-full  col-span-2 pb-10 pt-5">
+                    <button type="submit" class="px-40 py-2 bg-green-500 rounded-lg shadow-lg font-bold hover:bg-green-950">Submit</button>
+                </div>   
+                </form>
                 </div>
-    
-                <div class="w-full mt-12">
-                    <p class="text-xl pb-3 flex items-center">
-                        <i class="fas fa-list mr-3"></i> Latest Reports
-                    </p>
-                    <div class="bg-white overflow-auto">
-                        <table class="min-w-full bg-white">
-                            <thead class="bg-gray-800 text-white">
-                                <tr>
-                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
-                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Last name</th>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-700">
-                                <tr>
-                                    <td class="w-1/3 text-left py-3 px-4">Lian</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Smith</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr class="bg-gray-200">
-                                    <td class="w-1/3 text-left py-3 px-4">Emma</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Johnson</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="w-1/3 text-left py-3 px-4">Oliver</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Williams</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr class="bg-gray-200">
-                                    <td class="w-1/3 text-left py-3 px-4">Isabella</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Brown</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="w-1/3 text-left py-3 px-4">Lian</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Smith</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr class="bg-gray-200">
-                                    <td class="w-1/3 text-left py-3 px-4">Emma</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Johnson</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="w-1/3 text-left py-3 px-4">Oliver</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Williams</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                                <tr class="bg-gray-200">
-                                    <td class="w-1/3 text-left py-3 px-4">Isabella</td>
-                                    <td class="w-1/3 text-left py-3 px-4">Brown</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <div class="h-1 w-full bg-black mt-10"></div>
+            <h1 class="text-4xl text-center ">Dokumen Pendukung </h1>
+            <p class="text-2xl">1.Akta kelahiran:</p>
+            <a href="{{ url('administrator/form-akte/download') }}" download="filename.pdf" class="bg-green-700 text-xl ml-5 mb-10 "><button class="bg-yellow-400 px-5 py-2 flex text-4xl" type="button"><span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13 12V8H11V12H8L12 16L16 12H13Z" ></path></svg></span> download</button></a>
             </main>
     
-            <footer class="w-full bg-white text-right p-4">
-                Built by <a target="_blank" href="https://davidgrzyb.com" class="underline">David Grzyb</a>.
-            </footer>
+            
         </div>
         
     </div>
@@ -318,6 +285,13 @@
                 }
             }
         });
+
+    
+    </script>
+    <script>
+        var dt = new Date();
+document.getElementById("tanggalwaktu").innerHTML = dt.toLocaleDateString();
+
     </script>
 </body>
 </html>

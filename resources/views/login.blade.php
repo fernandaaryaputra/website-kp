@@ -1,16 +1,16 @@
 @extends('layout')
 @section('content')
 
-<div id="layoutAuthentication">
+<div id="layoutAuthentication ">
     <div id="layoutAuthentication_content">
         <main>
-            <div class="container bg-info py-5">
+            <div class="container bg-info py-5  " style="width: 100%; height: 100vh">
                 <div class="row justify-content-center btn-success">
                     <div class="col-lg-6 h-50">
                         <img src="{{ asset('img/login.jpg') }}" alt=" " class="" >
                     </div>
                     <div class="col-lg-5 h-100">
-                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5 bg-danger">
                             {{-- Error Alert --}}
                             @if(session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -27,7 +27,7 @@
                                
                                 <h3 class="text-center font-weight-light my-4">Login</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body bg-success">
                                 <form action="{{url('proses_login')}}" method="POST" id="logForm">
                                     {{ csrf_field() }}
                                     <div class="form-group">
