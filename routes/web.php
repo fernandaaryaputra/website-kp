@@ -19,7 +19,9 @@ use App\Http\Controllers\FasyangkesController;
 |
 */
 
-
+Route::get('/home',function(){
+    return view('home');
+});
 
 Route::get('/tables', function () {
     return view('tables');
@@ -38,7 +40,7 @@ Route::get('/administrator/menu', function(){
 });
 
 Route::match(['get','post'],'/administrator/form-akte',[AdministratorController::class,'store']);
-// metode nya get lalu masukkan namespace AuthController 
+// metode nya get lalu masukkan namespace AuthController
 // attribute name merupakan penamaan dari route yang kita buat
 // kita tinggal panggil fungsi route(name) pada layout atau controller
 Route::get('login', [AuthController::class,'index'])->name('login');
