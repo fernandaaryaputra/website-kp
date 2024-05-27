@@ -25,7 +25,7 @@
                                     <img src="{{ asset('image/library.png')}}" class="img-responsive img-body">
                                 </div> --}}
                                
-                                <h3 class="text-center font-weight-light my-4">Login</h3>
+                                <h3 class="text-center font-weight-light my-4 text-white">Login Panel</h3>
                             </div>
                             <div class="card-body bg-success">
                                 <form action="{{url('proses_login')}}" method="POST" id="logForm">
@@ -43,7 +43,7 @@
                                                 </button>
                                             </div>
                                             @enderror
-                                        <label class="small mb-1" for="inputEmailAddress">Username</label>
+                                        <label class="small mb-1 text-white" for="inputEmailAddress">Username</label>
                                         <input
                                             class="form-control py-4"
                                             id="inputEmailAddress"
@@ -55,7 +55,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputPassword">Password</label>
+                                        <label class="small mb-1 text-white" for="inputPassword">Password</label>
                                         <input
                                             class="form-control py-4"
                                             id="inputPassword"
@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox"/>
-                                            <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                                            <label class="custom-control-label text-white" for="rememberPasswordCheck">Remember password</label>
                                         </div>
                                     </div>
                                     <div
