@@ -79,3 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/administrator/form-akte/download', [AdministratorController::class,'downloadfile']);
+// Route::get('/administrator/download/{id}', [AdministratorController::class,'downloadaktekematian']);
+
+Route::get('administrator/download/{id}', [AdministratorController::class, 'downloadaktekematian']);
+

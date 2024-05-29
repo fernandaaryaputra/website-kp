@@ -15,6 +15,7 @@ class AdministratorController extends Controller
     //  fungsi untuk class Akte
      public function store(Request $request) 
     {
+       
         
         if($request->isMethod('post')){
             $tamu = new Akte();
@@ -31,6 +32,9 @@ class AdministratorController extends Controller
     }
 
     public function akte_kematian(Request $request) {
+         $data = array(
+            'aktes' => AkteKematian::all()
+        );
         if($request->isMethod('post')){
 
             $request->validate([
@@ -49,11 +53,27 @@ class AdministratorController extends Controller
             $tamu->save();
             return redirect('/administrator/form-akte-kematian')->with(['success' => 'Data Berhasil Terkirim']);
         }
-        return view('administrator.form-akte-kematian');
+        return view('administrator.form-akte-kematian',$data);
     }
 
     public function downloadfile(){
         $file = public_path('document/depan.pdf');
         return response()->download($file);
+    }
+    public function downloadaktekematian(Request $request, string $id){
+        // $download = AkteKematian::find($id);
+        // $data = array(
+        //     'kematian' => $download->pdf
+        // );
+        // $file = $request->pdf;
+        // return response()->download($data);
+
+            $download = AkteKematian::find($id);
+    if (!$download) {
+        return redirect('/administrator/form-akte-kematian')->with(['error' => 'File not found']);
+    }
+
+    $filePath = storage_path('app/' . $download->pdf);
+    return response()->download($filePath);
     }
 }
