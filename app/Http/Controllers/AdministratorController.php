@@ -40,13 +40,13 @@ class AdministratorController extends Controller
             $pdfFile = $request->file('pdf');
             $pdfFilePath = $pdfFile->storeAs('public/document', $pdfFile->hashName());
 
-            $tamuNew = new AkteKematian();
-            $tamuNew->nik = $request->nik;
-            $tamuNew->nama = $request->nama;
-            $tamuNew->alamat = $request->alamat;
-            $tamuNew->pdf = $pdfFilePath; // Save the file path in the database
-            $tamuNew->tanggallahir = $request->tanggallahir;
-            $tamuNew->save();
+            $tamu = new AkteKematian();
+            $tamu->nik = $request->nik;
+            $tamu->nama = $request->nama;
+            $tamu->alamat = $request->alamat;
+            $tamu->pdf = $pdfFilePath; // Save the file path in the database
+            $tamu->tanggallahir = $request->tanggallahir;
+            $tamu->save();
             return redirect('/administrator/form-akte-kematian')->with(['success' => 'Data Berhasil Terkirim']);
         }
         return view('administrator.form-akte-kematian');
