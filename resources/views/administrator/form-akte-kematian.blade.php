@@ -150,6 +150,22 @@
     
         <div class="w-full overflow-x-hidden border-t flex flex-col pb-4">
             <main class="w-full flex-grow p-6">
+                <table border="1" class="w-full bg-[#C1C0C0]">
+                    <thead>
+                        <td>NO</td>
+                        <td>NIK</td>
+                        <td>NAMA</td>
+                        <td>FILE</td>
+                    </thead>
+                    <tbody>
+                        @foreach ($aktes as $data)
+                        <td>{{ $data->nik }}</td>
+                        <td>{{ $data->nama }}</td>
+                        <td><a href="{{ url('administrator/download/'.$data->id) }}"><button type="button">download</button></a></td>
+                        @endforeach
+                    </tbody>
+
+                </table>
                 <h1 class="text-3xl text-black pb-6 font-semibold">Form Akte Kematian</h1>
                 
                 <div class="flex flex-wrap gap-20 px-5 mx-auto bg-[#C1C0C0] rounded-md shadow-md shadow-slate-700">
