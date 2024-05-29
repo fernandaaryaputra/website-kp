@@ -19,7 +19,9 @@ use App\Http\Controllers\FasyangkesController;
 |
 */
 
-
+Route::get('/home',function(){
+    return view('home');
+});
 
 Route::get('/tables', function () {
     return view('tables');
@@ -38,6 +40,7 @@ Route::get('/administrator/menu', function(){
 });
 
 Route::match(['get','post'],'/administrator/form-akte',[AdministratorController::class,'store']);
+
 Route::match(['get','post'],'/administrator/form-akte-kematian',[AdministratorController::class,'akte_kematian']);
 
 // testing muncul form-akte-kematian
