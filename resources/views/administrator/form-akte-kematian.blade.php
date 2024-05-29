@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu | Administrator</title>
+    <title>Form Akta Kematian | Administrator</title>
     <meta name="author" content="David Grzyb">
     <meta name="description" content="">
 
@@ -20,18 +20,30 @@
         .nav-item:hover { background: #1947ee; }
         .account-link:hover { background: #3d68ff; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-family-karla flex">
+     @if($message = Session::get('success'))
+    <script>
+        Swal.fire({
+            title: "Terima kasih",
+            text: "{{ Session::get('success') }}",
+            icon: "success"
+        });
+    </script>
+@endif
 
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Dukcapil Kota Tegal</a>
-            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button> -->
         </div>
         <nav class="text-white text-base font-semibold pt-3">
-            <a href="{{ url('/') }}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <button type="button" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                Tanggal  
+                <span id="tanggalwaktu" class="text-white font-bold ml-2"></span>
+            </button>
+            <a href="{{ url('/') }}" class="flex items-center  text-white py-4 pl-6 nav-item">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Dashboard
             </a>
@@ -136,38 +148,59 @@
             </button> -->
         </header>
     
-        <div class="w-full overflow-x-hidden border-t flex flex-col">
+        <div class="w-full overflow-x-hidden border-t flex flex-col pb-4">
             <main class="w-full flex-grow p-6">
-                <h1 class="text-3xl text-black pb-6">Menu Dukcapil</h1>
+                <h1 class="text-3xl text-black pb-6 font-semibold">Form Akte Kematian</h1>
                 
-                <div class="flex flex-wrap gap-20 px-5 mx-auto">
-
-                    <a href="{{ url('/administrator/form-akte') }}" class="bg-red-700 w-96 h-40 relative rounded-xl group  hover:bg-blue-700 transition ease-in-out">
-                        <img src="{{ asset('img/bayi.png') }}" alt="" class="w-24 h-20 ">
-                        <h1 class="mt-5 font-bold text-2xl text-right mr-5 mb-5 text-white group-hover:text-green-400">Akta Kelahiran</h1>
-                    </a>
-                    <a href="{{ url('/administrator/form-akte-kematian') }}" class="bg-black w-96 h-40 relative rounded-xl group hover:bg-red-700">
-                        <img src="{{ asset('img/RIP.png') }}" alt="" class="w-20 h-16 mt-2 ml-5">
-                        <h1 class="mt-8 font-bold text-2xl text-right mr-5 mb-5 text-white group-hover:text-blue-600">Akta Kematian</h1>
-                    </a>
-                    <a href="#" class="bg-blue-600 w-96 h-40 relative rounded-xl">
-                        <img src="{{ asset('img/family.png') }}" alt="" class="w-24 h-24">
-                        <h1 class="mt-5 font-bold text-2xl text-right mr-5 mb-5 text-white">Kartu Keluarga</h1>
-                    </a>
-                    <a href="#" class="bg-red-700 w-96 h-40 relative rounded-xl">
-                        <img src="{{ asset('img/bayi.png') }}" alt="" class="w-24 h-20">
-                        <h1 class="mt-5 font-bold text-2xl text-right mr-5 mb-5 text-white">Akta Kelahiran</h1>
-                    </a>
-                    <a href="#" class="bg-red-700 w-96 h-40 relative rounded-xl">
-                        <img src="{{ asset('img/bayi.png') }}" alt="" class="w-24 h-20">
-                        <h1 class="mt-5 font-bold text-2xl text-right mr-5 mb-5 text-white">Akta Kelahiran</h1>
-                    </a>
-                    <a href="#" class="bg-red-700 w-96 h-40 relative rounded-xl">
-                        <img src="{{ asset('img/bayi.png') }}" alt="" class="w-24 h-20">
-                        <h1 class="mt-5 font-bold text-2xl text-right mr-5 mb-5 text-white">Akta Kelahiran</h1>
-                    </a>
+                <div class="flex flex-wrap gap-20 px-5 mx-auto bg-[#C1C0C0] rounded-md shadow-md shadow-slate-700">
+                   <form method="POST" class="grid md:grid-cols-2 w-full gap-10  auto-rows-max grid-cols-1 pt-7" enctype="multipart/form-data">
+                    @csrf
+                    <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl">NIK</label>
+                    <br>
+                    <input type="text" name="nik" placeholder="nik" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl">Nama Lengkap</label>
+                    <br>
+                    <input type="text" name="nama" placeholder="nama lengkap"  class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
                 </div>
-            
+                <div class="col-span-2">
+                    <label for="" class="text-2xl">Alamat</label>
+                    <input type="text" name="alamat" placeholder="alamat" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                </div>
+                <div class="col-span-2">
+                    <label for="" class="text-2xl">Upload File</label>
+                    <input type="file" class="bg-white p-2 form-control w-full h-12 mt-2 rounded-lg pl-2 shadow-lg" id="pdf" name="pdf" accept="application/pdf" required>
+                    {{-- <input type="text" name="pdf" placeholder="alamat" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg"> --}}
+                </div>
+                    <div class="col-span-2">
+                        <label for="" class="text-2xl">Tanggal Lahir</label>
+                        
+                        <input type="datetime-local" name="tanggallahir" id="tanggallahir" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div>
+                    {{-- <input type="datetime"> --}}
+                    
+                    {{-- <div class="col-span-2 md:col-span-1">
+                    <label for="" class="text-2xl">Tempat Tanggal Lahir</label>
+                    <input type="text" name="ayah" placeholder="tempat tanggal lahir" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div> --}}
+
+                    {{-- <div class="col-span-2 md:col-span-1">
+                        <label for="" class="text-2xl"> Nama Ibu</label>
+                        <br>
+                    <input type="text" name="ibu" placeholder="ibu" class="w-full h-12 mt-2 rounded-lg pl-2 shadow-lg">
+                    </div> --}}
+                    <div class="flex justify-center w-full  col-span-2 pb-10 pt-5">
+                        <button type="submit" class="px-40 py-2 bg-green-500 rounded-lg shadow-lg font-bold hover:bg-green-950 hover:text-white">Submit</button>
+                    </div>   
+                </form>
+            </div>
+                {{-- <div class="h-1 w-full bg-black mt-10"></div>
+            <h1 class="text-4xl text-center ">Dokumen Pendukung </h1>
+            <p class="text-2xl">1.Akta kelahiran:</p>
+            <a href="{{ url('administrator/form-akte/download') }}" download="filename.pdf" class="bg-green-700 text-xl ml-5 mb-10 "><button class="bg-yellow-400 px-5 py-2 flex text-4xl" type="button"><span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13 12V8H11V12H8L12 16L16 12H13Z" ></path></svg></span> download</button></a> --}}
             </main>
     
             
@@ -258,6 +291,13 @@
                 }
             }
         });
+
+    
+    </script>
+    <script>
+        var dt = new Date();
+document.getElementById("tanggalwaktu").innerHTML = dt.toLocaleDateString();
+
     </script>
 </body>
 </html>

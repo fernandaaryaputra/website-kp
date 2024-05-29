@@ -38,6 +38,14 @@ Route::get('/administrator/menu', function(){
 });
 
 Route::match(['get','post'],'/administrator/form-akte',[AdministratorController::class,'store']);
+Route::match(['get','post'],'/administrator/form-akte-kematian',[AdministratorController::class,'akte_kematian']);
+
+// testing muncul form-akte-kematian
+// Route::get('/administrator/form-akte-kematian', function(){
+//     return view('administrator.form-akte-kematian');
+// });
+//
+
 // metode nya get lalu masukkan namespace AuthController 
 // attribute name merupakan penamaan dari route yang kita buat
 // kita tinggal panggil fungsi route(name) pada layout atau controller
