@@ -42,6 +42,7 @@ class AdministratorController extends Controller
             ]);
 
             $pdfFile = $request->file('pdf');
+            $originalFileName = $pdfFile->getClientOriginalName(); // Get original file name
             $pdfFilePath = $pdfFile->storeAs('public/document', $pdfFile->hashName());
 
             $tamu = new AkteKematian();
@@ -49,6 +50,7 @@ class AdministratorController extends Controller
             $tamu->nama = $request->nama;
             $tamu->alamat = $request->alamat;
             $tamu->pdf = $pdfFilePath; // Save the file path in the database
+            $tamu->original_filename = $originalFileName; // Save the original file name in the database
             $tamu->tanggallahir = $request->tanggallahir;
             $tamu->save();
             return redirect('/administrator/form-akte-kematian')->with(['success' => 'Data Berhasil Terkirim']);
@@ -74,6 +76,8 @@ class AdministratorController extends Controller
     }
 
     $filePath = storage_path('app/' . $download->pdf);
-    return response()->download($filePath);
+    // return response()->download($filePath);
+    $originalFileName = $download->original_filename;
+    return response()->download($filePath, $originalFileName);
     }
 }

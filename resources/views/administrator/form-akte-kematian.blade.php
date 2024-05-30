@@ -150,18 +150,27 @@
     
         <div class="w-full overflow-x-hidden border-t flex flex-col pb-4">
             <main class="w-full flex-grow p-6">
-                <table border="1" class="w-full bg-[#C1C0C0]">
-                    <thead>
-                        <td>NO</td>
-                        <td>NIK</td>
-                        <td>NAMA</td>
-                        <td>FILE</td>
+                <h1 class="text-3xl text-black pb-6 font-semibold">Data List Akte Kematian</h1>
+                <table border="1" class="w-full bg-[#C1C0C0] rounded-md shadow-md shadow-slate-700 mb-20 text-center">
+                    <thead class="bg-slate-600 text-white border border-white font-semibold">
+                        <tr class="border border-white border-b-white text-lg">
+                            <td class="border border-white border-b-white">NO</td>
+                            <td class="border border-white border-b-white">NIK</td>
+                            <td class="border border-white border-b-white">NAMA LENGKAP</td>   
+                            <td class="border border-white border-b-white">FILE</td>
+                        </tr>    
                     </thead>
-                    <tbody>
+                    <tbody class=" border border-white text-black text-base">
+                            {{-- @php
+                                $counter = 1
+                            @endphp --}}
                         @foreach ($aktes as $data)
-                        <td>{{ $data->nik }}</td>
-                        <td>{{ $data->nama }}</td>
-                        <td><a href="{{ url('administrator/download/'.$data->id) }}"><button type="button">download</button></a></td>
+                        <tr class="border border-white border-b-white">
+                            <td class="border border-white border-b-white">{{ $data->id }}.</td>
+                            <td class="border border-white border-b-white">{{ $data->nik }}</td>
+                            <td class="border border-white border-b-white">{{ $data->nama }}</td>
+                            <td class="border border-white border-b-white"><a href="{{ url('administrator/download/'.$data->id) }}" target="_blank"><button type="button" class="bg-cyan-700 hover:bg-green-700 text-white px-3 rounded-lg my-3">Download File</button></a></td>
+                        </tr>
                         @endforeach
                     </tbody>
 

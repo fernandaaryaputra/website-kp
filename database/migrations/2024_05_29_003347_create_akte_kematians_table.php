@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nik');  
             $table->string('nama');
             $table->string('alamat');  
-            $table->string('pdf');
+            $table->string('pdf'); // Jangan lupa tambahkan kolom 'pdf'
+            $table->string('original_filename')->nullable(); // Jangan menggunakan 'after' dalam tabel baru
             $table->timestamp('tanggallahir');
             $table->timestamps();
         });
