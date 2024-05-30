@@ -42,6 +42,8 @@ Route::get('/administrator/menu', function(){
 Route::match(['get','post'],'/administrator/form-akte',[AdministratorController::class,'store']);
 
 Route::match(['get','post'],'/administrator/form-akte-kematian',[AdministratorController::class,'akte_kematian']);
+Route::match(['get','post'],'/administrator/form-ktp',[AdministratorController::class,'dataktp']);
+// Route::match(['get','post'],'administrator/form-ktp',[AdministratorController::class,'ktp']);
 
 // testing muncul form-akte-kematian
 // Route::get('/administrator/form-akte-kematian', function(){
@@ -82,4 +84,7 @@ Route::get('/administrator/form-akte/download', [AdministratorController::class,
 // Route::get('/administrator/download/{id}', [AdministratorController::class,'downloadaktekematian']);
 
 Route::get('administrator/download/{id}', [AdministratorController::class, 'downloadaktekematian']);
+
+
+// Form KTP
 
