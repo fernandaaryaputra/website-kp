@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Akte;
 use App\Models\AkteKematian;
+use App\Models\Ktp;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -56,6 +57,35 @@ class AdministratorController extends Controller
             return redirect('/administrator/form-akte-kematian')->with(['success' => 'Data Berhasil Terkirim']);
         }
         return view('administrator.form-akte-kematian',$data);
+    }
+    public function dataktp(Request $request){
+        if($request->isMethod('post')){
+
+            $request->validate([
+                'foto' => 'required|file|mimes:png,jpg,jpeg|max:2040',
+                'dokumen' => 'required|file|mimes:pdf|max:2040'
+            ]);
+
+            $dokumen = $request->file('dokumen');
+            $dokumenPath = $dokumen->storeAs('public/ktp', $dokumen->getClientOriginalName());
+            $foto = $request->file('foto');
+            $fotoPath = $foto->storeAs('public/ktp', $foto->getClientOriginalExtension());
+
+            $ktp = new Ktp();
+            $ktp->nik = $request->nik;
+            $ktp->nama = $request->nama;
+            $ktp->tanggallahir = $request->tanggallahir;
+            $ktp->jeniskelamin = $request->jeniskelamin;
+            $ktp->alamat = $request->alamat;
+            $ktp->statusperkawinan = $request->statusperkawinan;
+            $ktp->exp = $request->exp;
+            $ktp->agama = $request->agama;
+            $ktp->foto = $fotoPath; // Save the file path in the database
+            $ktp->dokumen = $dokumenPath; // Save the file path in the database
+            $ktp->save();
+            return redirect('/administrator/form-akte-kematian')->with(['success' => 'Data Berhasil Terkirim']);
+        }
+        return view('administrator.form-ktp');
     }
 
     public function downloadfile(){
