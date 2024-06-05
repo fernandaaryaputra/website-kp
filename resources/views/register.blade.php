@@ -1,4 +1,5 @@
 @extends('layout')
+@section('title', 'Daftar Akun')
 @section('content')
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">

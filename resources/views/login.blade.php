@@ -1,4 +1,5 @@
 @extends('layout')
+@section('title', 'Login Panel')
 @section('content')
 
 <div id="layoutAuthentication ">

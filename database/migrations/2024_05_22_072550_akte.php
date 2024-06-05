@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('akte', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('kk');  
             $table->string('nik');  
             $table->string('ayah');  
             $table->string('ibu');  

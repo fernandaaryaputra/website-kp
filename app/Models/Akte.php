@@ -9,4 +9,9 @@ class Akte extends Model
 {
     use HasFactory;
     protected $table = 'akte';
+
+    // public function akte_kematians()
+    // {
+    //     return $this->hasMany(AkteKematian::class, 'nik', 'nik');
+    // }
 }
