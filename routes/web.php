@@ -19,6 +19,12 @@ use App\Http\Controllers\FasyangkesController;
 |
 */
 
+Route::get('/tamplate',function(){
+    return view('tamplate');
+});
+
+
+
 Route::get('/home',function(){
     return view('home');
 });
@@ -39,9 +45,24 @@ Route::get('/administrator/menu', function(){
     return view('administrator.menu');
 });
 
+// AKTE
+Route::match(['get','post'],'/administrator/menu-akte',[AdministratorController::class,'akte']);
 Route::match(['get','post'],'/administrator/form-akte',[AdministratorController::class,'store']);
+Route::match(['get','post'],'/administrator/menu-akte/edit/{id}',[AdministratorController::class,'edit_akte']);
+Route::put('/administrator/update-akte/{id}', [AdministratorController::class, 'update_akte']);
+Route::get('/administrator/cari-akte',[AdministratorController::class,'cari_akte']);
+Route::match(['get','post'],'/administrator/menu-akte/delete/{id}',[AdministratorController::class,'hapus_akte']);
 
-Route::match(['get','post'],'/administrator/form-akte-kematian',[AdministratorController::class,'akte_kematian']);
+
+// AKTE KEMATIAN
+Route::match(['get','post'],'/administrator/menu-akte-kematian',[AdministratorController::class,'akte_kematian']);
+Route::get('/administrator/cari-akte-kematian',[AdministratorController::class,'cari_akte_kematian']);
+Route::match(['get','post'],'/administrator/form-akte-kematian',[AdministratorController::class,'tambah_akte_kematian']);
+Route::match(['get','post'],'/administrator/menu-akte-kematian/edit/{id}',[AdministratorController::class,'edit_akte_kematian']);
+Route::put('/administrator/update-akte-kematian/{id}', [AdministratorController::class, 'update_akte_kematian']);
+Route::match(['get','post'],'/administrator/menu-akte-kematian/delete/{id}',[AdministratorController::class,'hapus_akte_kematian']);
+
+
 Route::match(['get','post'],'/administrator/form-ktp',[AdministratorController::class,'dataktp']);
 // Route::match(['get','post'],'administrator/form-ktp',[AdministratorController::class,'ktp']);
 
@@ -83,8 +104,8 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/administrator/form-akte/download', [AdministratorController::class,'downloadfile']);
 // Route::get('/administrator/download/{id}', [AdministratorController::class,'downloadaktekematian']);
 
+// Route::get('administrator/download/{id}', [AdministratorController::class, 'downloadaktekematian']);
 Route::get('administrator/download/{id}', [AdministratorController::class, 'downloadaktekematian']);
-
 
 // Form KTP
 
